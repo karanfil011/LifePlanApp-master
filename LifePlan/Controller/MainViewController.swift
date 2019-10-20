@@ -73,6 +73,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         detailVC!.goalTitle = goal[indexPath.item].title!
         detailVC?.icon = goal[indexPath.item].image
         detailVC?.timePeriod = String(goal[indexPath.item].period) + " " + goal[indexPath.item].goalPeriod!
+        detailVC?.mindset = goal[indexPath.item].mindset
+        detailVC?.detailText = goal[indexPath.item].detailText
+        detailVC?.time = goal[indexPath.item].period
 
         self.navigationController?.pushViewController(detailVC!, animated: true)
     }
@@ -83,12 +86,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         goal.remove(at: indx)
         saveGoal()
     }
-    
-    
-    @IBAction func deleteButtonPressed(_ sender: UIBarButtonItem) {
-        
-    }
-    
     
     
     @IBAction func addButtonPressed(_ sender: Any) {

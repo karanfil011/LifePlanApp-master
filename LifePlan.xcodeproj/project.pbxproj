@@ -17,6 +17,8 @@
 		4128F19B2349147B007A8ADE /* GoalsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128F19A2349147B007A8ADE /* GoalsCollectionViewCell.swift */; };
 		4128F19F23493681007A8ADE /* AddGoalMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128F19E23493681007A8ADE /* AddGoalMainViewController.swift */; };
 		412B6683235B201200382420 /* AddGoalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412B6682235B201200382420 /* AddGoalCollectionViewCell.swift */; };
+		412B6685235B839300382420 /* ChangeGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412B6684235B839300382420 /* ChangeGoalViewController.swift */; };
+		412B6687235B84E000382420 /* ChangesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412B6686235B84E000382420 /* ChangesCollectionViewCell.swift */; };
 		413CED39235B19BE0085F77A /* Goal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 413CED38235B19BE0085F77A /* Goal.storyboard */; };
 		417DB6202353999600B6D16B /* DetailGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417DB61F2353999600B6D16B /* DetailGoalViewController.swift */; };
 		419D9FB523507C42003195A4 /* GoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419D9FB423507C42003195A4 /* GoalModel.swift */; };
@@ -35,6 +37,8 @@
 		4128F19A2349147B007A8ADE /* GoalsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsCollectionViewCell.swift; sourceTree = "<group>"; };
 		4128F19E23493681007A8ADE /* AddGoalMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalMainViewController.swift; sourceTree = "<group>"; };
 		412B6682235B201200382420 /* AddGoalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalCollectionViewCell.swift; sourceTree = "<group>"; };
+		412B6684235B839300382420 /* ChangeGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeGoalViewController.swift; sourceTree = "<group>"; };
+		412B6686235B84E000382420 /* ChangesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangesCollectionViewCell.swift; sourceTree = "<group>"; };
 		413CED38235B19BE0085F77A /* Goal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Goal.storyboard; sourceTree = "<group>"; };
 		417DB61F2353999600B6D16B /* DetailGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGoalViewController.swift; sourceTree = "<group>"; };
 		419D9FB423507C42003195A4 /* GoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModel.swift; sourceTree = "<group>"; };
@@ -85,10 +89,12 @@
 			children = (
 				4128F1982349046D007A8ADE /* MainViewController.swift */,
 				4128F19E23493681007A8ADE /* AddGoalMainViewController.swift */,
-				4128F19A2349147B007A8ADE /* GoalsCollectionViewCell.swift */,
 				417DB61F2353999600B6D16B /* DetailGoalViewController.swift */,
+				412B6684235B839300382420 /* ChangeGoalViewController.swift */,
+				4128F19A2349147B007A8ADE /* GoalsCollectionViewCell.swift */,
 				411839E1235A18B6002B2117 /* SecondScreenCollectionViewCell.swift */,
 				412B6682235B201200382420 /* AddGoalCollectionViewCell.swift */,
+				412B6686235B84E000382420 /* ChangesCollectionViewCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -193,8 +199,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				411839E2235A18B6002B2117 /* SecondScreenCollectionViewCell.swift in Sources */,
+				412B6687235B84E000382420 /* ChangesCollectionViewCell.swift in Sources */,
 				4128F1992349046D007A8ADE /* MainViewController.swift in Sources */,
 				4128F19B2349147B007A8ADE /* GoalsCollectionViewCell.swift in Sources */,
+				412B6685235B839300382420 /* ChangeGoalViewController.swift in Sources */,
 				4128F19F23493681007A8ADE /* AddGoalMainViewController.swift in Sources */,
 				4128F17C23489D71007A8ADE /* LifePlan.xcdatamodeld in Sources */,
 				412B6683235B201200382420 /* AddGoalCollectionViewCell.swift in Sources */,

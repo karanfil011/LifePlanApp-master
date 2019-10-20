@@ -14,5 +14,6 @@ class SecondScreenCollectionViewCell: UICollectionViewCell {
     @IBOutlet var timePeriod: UILabel!
     @IBOutlet var titleGoal: UILabel!
     
+    @IBOutlet weak var imageIcon: UIImageView!
     
 }
