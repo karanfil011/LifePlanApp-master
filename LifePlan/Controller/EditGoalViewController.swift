@@ -10,7 +10,7 @@ import UIKit
 
 protocol EditProtocol {
 //    func edit(ind: Int, name: String)
-    func edit(title: String, detailText: String, notification: String)
+    func edit(title: String, detailText: String, notification: String, selectedImportance: String)
 }
 
 class EditGoalViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
@@ -50,7 +50,7 @@ class EditGoalViewController: UIViewController, UICollectionViewDelegate, UIColl
     var indx: IndexPath?
     
     var textFieldTitle: String?
-    var costGoal: Int16?
+    var costGoal: String?
     var textTextField: String?
     var notification: String?
     
@@ -58,6 +58,9 @@ class EditGoalViewController: UIViewController, UICollectionViewDelegate, UIColl
     var selectedIconGoal: String!
 //    var selectedImportanceButtonOne: String?
     var selectedGoalImage: String?
+    
+    var importanceString = ""
+    var importanceIsSelected = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,13 +73,18 @@ class EditGoalViewController: UIViewController, UICollectionViewDelegate, UIColl
         }
         
         editTitle.text = textFieldTitle
-//        editCost.text = costGoal!
+        editCost.text = costGoal!
         editText.text = textTextField
         editDateTextField.text = notification
         
-        
-        
-        selectedImportance()
+        if importanceIsSelected == false {
+            selectedImportance()
+            importanceIsSelected = true
+        }
+        else {
+            print("Something")
+        }
+
 
     }
     
@@ -84,7 +92,8 @@ class EditGoalViewController: UIViewController, UICollectionViewDelegate, UIColl
  
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
         
-        editDelegate?.edit(title: editTitle.text!, detailText: editText.text, notification: editDateTextField.text!)
+        editDelegate?.edit(title: editTitle.text!, detailText: editText.text, notification: editDateTextField.text!, selectedImportance: importanceString)
+        
         
         dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
@@ -93,6 +102,41 @@ class EditGoalViewController: UIViewController, UICollectionViewDelegate, UIColl
     @IBAction func selectedImportanceBtn(_ sender: UIButton) {
         
         
+        
+        if sender.tag == 1 && importanceIsSelected == true {
+            importanceString = "urgent"
+            
+            editUrgentButton.backgroundColor = .red
+            editUrgentButton.setTitleColor(.white, for: .normal)
+            editUrgentButton.layer.cornerRadius = 5
+            
+            importanceIsSelected = true
+            
+            print(importanceString)
+        }
+        else if sender.tag == 2 && importanceIsSelected == true {
+            importanceString = "important"
+            
+            editImportantButton.backgroundColor = .purple
+            editImportantButton.setTitleColor(.white, for: .normal)
+            editImportantButton.layer.cornerRadius = 5
+            
+            importanceIsSelected = true
+            
+            print(importanceString)
+        }
+        else if sender.tag == 3 && importanceIsSelected == true{
+            importanceString = "not much"
+            
+            editNotMuchButton.layer.borderWidth = 1
+            editNotMuchButton.layer.borderColor = UIColor.black.cgColor
+            editNotMuchButton.setTitleColor(.black, for: .normal)
+            editNotMuchButton.layer.cornerRadius = 5
+            
+            importanceIsSelected = true
+            
+            print(importanceString)
+        }
         
         
     }
@@ -119,13 +163,13 @@ class EditGoalViewController: UIViewController, UICollectionViewDelegate, UIColl
 //
 //    }
 
-    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EditIconCell", for: indexPath) as! EditImageCollectionViewCell
-        cell.editIconImage.image = UIImage(named: selectedIconGoal)
-        cell.backgroundColor = .red
-        return true
-    }
-    
+//    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EditIconCell", for: indexPath) as! EditImageCollectionViewCell
+//        cell.editIconImage.image = UIImage(named: selectedIconGoal)
+//        cell.backgroundColor = .red
+//        return true
+//    }
+//
     
     func selectedImportance() {
         if selectedImportanceButton == editImportantButton.titleLabel?.text {
@@ -140,12 +184,14 @@ class EditGoalViewController: UIViewController, UICollectionViewDelegate, UIColl
             editUrgentButton.backgroundColor = .red
             editUrgentButton.setTitleColor(.white, for: .normal)
             editUrgentButton.layer.cornerRadius = 5
+            
         }
         else {
             editNotMuchButton.layer.borderWidth = 1
             editNotMuchButton.layer.borderColor = UIColor.black.cgColor
             editNotMuchButton.setTitleColor(.black, for: .normal)
             editNotMuchButton.layer.cornerRadius = 5
+            
         }
     }
     

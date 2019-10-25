@@ -55,6 +55,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
 //        layout.itemSize = CGSize(width: self.goalsCollectionView.frame.size.width - 20/2, height: self.goalsCollectionView.frame.size.height / 3)
     
         loadGoal()
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -81,18 +82,20 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
             cell.goalTitleLabel.textColor = .white
             cell.goalCost.textColor = .white
         }
-        else {
-            cell.layer.borderColor = UIColor.black.cgColor
-            cell.layer.borderWidth = 2
-            cell.layer.backgroundColor = UIColor.white.cgColor
-            cell.goalTitleLabel.textColor = .black
-            cell.goalCost.textColor = .black
+        else if goal[indexPath.item].importance == "not much"{
+//            cell.layer.borderColor = UIColor.black.cgColor
+//            cell.layer.borderWidth = 2
+            cell.layer.backgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
+            cell.goalTitleLabel.textColor = .white
+            cell.goalCost.textColor = .white
+//            cell.checkbox.layer.borderColor = UIColor.black.cgColor
+//            cell.checkbox.layer.borderWidth = 2
+//            cell.checkbox.layer.cornerRadius = 5
             
-            
-            
+
         }
         
-        
+
         
 
         
@@ -106,7 +109,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let editVC = storyboard?.instantiateViewController(withIdentifier: "EditGoalViewController") as? EditGoalViewController
 
         editVC?.textFieldTitle = goal[indexPath.item].title
-        editVC?.costGoal = goal[indexPath.item].cost
+        editVC?.costGoal = String(goal[indexPath.item].cost)
         editVC?.textTextField = goal[indexPath.item].detailText
         editVC?.notification = goal[indexPath.item].dateTime
         editVC?.selectedImportanceButton = goal[indexPath.item].importance
@@ -155,7 +158,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         else if segue.identifier == "EditCell" {
             let editVC = segue.destination as? EditGoalViewController
             editVC?.textFieldTitle = goal[indexPathItem].title
-            editVC?.costGoal = goal[indexPathItem].cost
+            editVC?.costGoal = String(goal[indexPathItem].cost)
             editVC?.textTextField = goal[indexPathItem].detailText
             editVC?.notification = goal[indexPathItem].dateTime
             editVC?.selectedImportanceButton = goal[indexPathItem].importance
@@ -166,7 +169,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
     }
     
-    func edit(title: String, detailText: String, notification: String) {
+    func edit(title: String, detailText: String, notification: String, selectedImportance: String) {
         print("Here..")
 //        print(someName)
         
@@ -174,6 +177,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         goal[indexPathItem].setValue(title, forKey: "title")
         goal[indexPathItem].setValue(detailText, forKey: "detailText")
         goal[indexPathItem].setValue(notification, forKey: "dateTime")
+        goal[indexPathItem].setValue(selectedImportance, forKey: "importance")
         
         
         saveGoal()
