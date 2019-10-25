@@ -15,7 +15,11 @@ protocol DisplayGoalInMain {
 }
 
 class AddGoalMainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UITextFieldDelegate {
-   
+    
+    
+    
+    @IBOutlet weak var dateTextField: UITextField!
+    
     @IBOutlet var addGoalCollectionView: UICollectionView!
     
     @IBOutlet var titleTextField: UITextField!
@@ -24,20 +28,20 @@ class AddGoalMainViewController: UIViewController, UICollectionViewDataSource, U
     
     @IBOutlet var detailTextView: UITextView!
     
-    @IBOutlet var mindsetTextField: UITextField!
+    @IBOutlet weak var urgentButton: UIButton!
     
-    @IBOutlet var daysButton: UIButton!
+    @IBOutlet weak var importantButton: UIButton!
     
-    @IBOutlet var monthsButton: UIButton!
-    
-    @IBOutlet var yearButton: UIButton!
+    @IBOutlet weak var notMuchButton: UIButton!
     
     var goal = [Goal]()
     
     var delegate: DisplayGoalInMain?
     
-    var goalPeriod = ""
+    var importance = ""
     var selectedIndex = [Int]()
+    
+    var datePicker: UIDatePicker?
     
     var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -64,7 +68,18 @@ class AddGoalMainViewController: UIViewController, UICollectionViewDataSource, U
         buttonDesign()
         
         
+        datePicker = UIDatePicker()
+        datePicker?.datePickerMode = .dateAndTime
+        
+        dateTextField.inputView = datePicker
+        
+        datePicker?.addTarget(self, action: #selector(AddGoalMainViewController.dateChanged(datePicker:)), for: .valueChanged)
+        
 
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(AddGoalMainViewController.viewTapped(gestureRecognizer:)))
+        
+//        view.addGestureRecognizer(tapGesture)
+        
         if let layout = addGoalCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
         }
@@ -79,6 +94,18 @@ class AddGoalMainViewController: UIViewController, UICollectionViewDataSource, U
         
     }
     
+//    @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
+//        view.endEditing(true)
+//    }
+    
+    @objc func dateChanged(datePicker: UIDatePicker) {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EE, dd.MM.yy, HH:mm"
+        
+        dateTextField.text = dateFormatter.string(from: datePicker.date)
+//        view.endEditing(true)
+    }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
     
@@ -86,10 +113,13 @@ class AddGoalMainViewController: UIViewController, UICollectionViewDataSource, U
         let myGoal = Goal(context: context)
         myGoal.title = titleTextField.text
         myGoal.detailText = detailTextView.text
-        myGoal.mindset = mindsetTextField.text
-        myGoal.period = Int16(numberTextField.text!) ?? 0
-        myGoal.goalPeriod = goalPeriod
+        myGoal.cost = Int16(numberTextField.text!) ?? 10
+        myGoal.checked = false
+        myGoal.importance = importance
+        myGoal.dateTime = dateTextField.text
         
+//        myGoal.date = Date(timeIntervalSince1970: dateTextField!.text)
+
         if selectedIndex[0] == 0 {
             myGoal.image = "launch"
         }
@@ -131,42 +161,40 @@ class AddGoalMainViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     
-    @IBAction func goalDatePressed(_ sender: UIButton) {
-        
+    
+    @IBAction func importanceBtnPressed(_ sender: UIButton) {
         
         if sender.tag == 1 {
             
             sender.backgroundColor = .red
             sender.setTitleColor(.white, for: .normal)
-            goalPeriod = "days"
+            importance = "urgent"
         }
-        
+            
         else if sender.tag == 2 {
-            sender.backgroundColor = .red
+            sender.backgroundColor = .purple
             sender.setTitleColor(.white, for: .normal)
-            goalPeriod = "months"
+            importance = "important"
         }
-        
+            
         else if sender.tag == 3 {
-            sender.backgroundColor = .red
-            sender.setTitleColor(.white, for: .normal)
-            goalPeriod = "year"
+            sender.layer.borderColor = UIColor.black.cgColor
+            sender.layer.borderWidth = 1
+            sender.setTitleColor(.black, for: .normal)
+            importance = "not much"
         }
-        
-        
     }
+    
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         numberTextField.resignFirstResponder()
         detailTextView.resignFirstResponder()
-        mindsetTextField.resignFirstResponder()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         titleTextField.resignFirstResponder()
         detailTextView.resignFirstResponder()
-        mindsetTextField.resignFirstResponder()
         
         return true
     }
@@ -263,33 +291,33 @@ class AddGoalMainViewController: UIViewController, UICollectionViewDataSource, U
     
     func buttonDesign() {
         
-        daysButton.layer.cornerRadius = 5
-        daysButton.backgroundColor = .white
-        daysButton.setTitleColor(.black, for: .normal)
+        urgentButton.layer.cornerRadius = 5
+        urgentButton.backgroundColor = .white
+        urgentButton.setTitleColor(.black, for: .normal)
         
-        daysButton.layer.shadowColor = UIColor.darkGray.cgColor
-        daysButton.layer.shadowRadius = 4
-        daysButton.layer.shadowOpacity = 0.5
-        daysButton.layer.shadowOffset = CGSize(width: 0, height: 0)
+        urgentButton.layer.shadowColor = UIColor.darkGray.cgColor
+        urgentButton.layer.shadowRadius = 4
+        urgentButton.layer.shadowOpacity = 0.5
+        urgentButton.layer.shadowOffset = CGSize(width: 0, height: 0)
         
         
-        monthsButton.layer.cornerRadius = 5
-        monthsButton.backgroundColor = .white
-        monthsButton.setTitleColor(.black, for: .normal)
+        importantButton.layer.cornerRadius = 5
+        importantButton.backgroundColor = .white
+        importantButton.setTitleColor(.black, for: .normal)
         
-        monthsButton.layer.shadowColor = UIColor.darkGray.cgColor
-        monthsButton.layer.shadowRadius = 4
-        monthsButton.layer.shadowOpacity = 0.5
-        monthsButton.layer.shadowOffset = CGSize(width: 0, height: 0)
+        importantButton.layer.shadowColor = UIColor.darkGray.cgColor
+        importantButton.layer.shadowRadius = 4
+        importantButton.layer.shadowOpacity = 0.5
+        importantButton.layer.shadowOffset = CGSize(width: 0, height: 0)
         
-        yearButton.layer.cornerRadius = 5
-        yearButton.backgroundColor = .white
-        yearButton.setTitleColor(.black, for: .normal)
+        notMuchButton.layer.cornerRadius = 5
+        notMuchButton.backgroundColor = .white
+        notMuchButton.setTitleColor(.black, for: .normal)
         
-        yearButton.layer.shadowColor = UIColor.darkGray.cgColor
-        yearButton.layer.shadowRadius = 4
-        yearButton.layer.shadowOpacity = 0.5
-        yearButton.layer.shadowOffset = CGSize(width: 0, height: 0)
+        notMuchButton.layer.shadowColor = UIColor.darkGray.cgColor
+        notMuchButton.layer.shadowRadius = 4
+        notMuchButton.layer.shadowOpacity = 0.5
+        notMuchButton.layer.shadowOffset = CGSize(width: 0, height: 0)
     }
     
 }

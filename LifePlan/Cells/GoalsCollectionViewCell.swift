@@ -20,8 +20,10 @@ class GoalsCollectionViewCell: UICollectionViewCell {
         
     @IBOutlet var goalIconImage: UIImageView!
     
+    @IBOutlet weak var checkbox: UIImageView!
     
-    @IBOutlet var timeLabel: UILabel!
+    @IBOutlet weak var goalCost: UILabel!
+    
     
     @IBOutlet var goalTitleLabel: UILabel!
     
