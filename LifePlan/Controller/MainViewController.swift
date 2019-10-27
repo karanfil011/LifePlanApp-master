@@ -169,15 +169,18 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
     }
     
-    func edit(title: String, detailText: String, notification: String, selectedImportance: String) {
+    func edit(title: String, detailText: String, notification: String, selectedImportance: String, selectedImage: String) {
         print("Here..")
-//        print(someName)
+        
+        
+        
         
         // Select specific indexpath
         goal[indexPathItem].setValue(title, forKey: "title")
         goal[indexPathItem].setValue(detailText, forKey: "detailText")
         goal[indexPathItem].setValue(notification, forKey: "dateTime")
         goal[indexPathItem].setValue(selectedImportance, forKey: "importance")
+        goal[indexPathItem].setValue(selectedImage, forKey: "image")
         
         
         saveGoal()

@@ -178,9 +178,8 @@ class AddGoalMainViewController: UIViewController, UICollectionViewDataSource, U
         }
             
         else if sender.tag == 3 {
-            sender.layer.borderColor = UIColor.black.cgColor
-            sender.layer.borderWidth = 1
-            sender.setTitleColor(.black, for: .normal)
+            sender.backgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
+            sender.setTitleColor(.white, for: .normal)
             importance = "not much"
         }
     }
